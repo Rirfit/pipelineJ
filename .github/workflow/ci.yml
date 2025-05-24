@@ -1,6 +1,6 @@
 name: Testes com Mocha
 
-on: 
+on:
   push:
     branches:
       - main
@@ -8,25 +8,27 @@ on:
     branches:
       - main
 
-
-
- jobs:
+jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do Código
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Configurar Node.js   
+      - name: Configurar Node.js
         uses: actions/setup-node@v3
-        with: 
+        with:
           node-version: '16'
-      - name: Instalar dependencias
+
+      - name: Instalar dependências
         run: npm install
 
       - name: Garantir permissões de execução para Mocha
         run: chmod +x ./node_modules/.bin/mocha
 
       - name: Verificar o caminho do Mocha
-        run: ls -l 
+        run: ls -l ./node_modules/.bin/mocha
+
+      - name: Rodar os testes com Mocha
+        run: npx mocha
